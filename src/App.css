@@ -13,16 +13,40 @@
     }
 }
 
+ul.App-list {
+    text-align: left;
+    background-color: #ffffff;
+    color: black;
+}
+
+.column {
+    float: centre;
+    width: 50%;
+    height: 100px;
+    background-color: red;
+}
+
 .App-header {
     width: 100%;
-    background-color: #282c34;
+    background-color: #a75d9d;
     min-height: 40vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    font-size: calc(20px + 2vmin);
+    color: black;
+}
+
+.App-rect {
+    background-color: red;
+    padding: 20px;
+    width: 120%;
+    height: 300%;
+}
+
+.App-Rows {
+    width: 100% back;
 }
 
 .App-link {
