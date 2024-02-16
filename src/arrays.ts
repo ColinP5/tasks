@@ -1,10 +1,18 @@
-/**
+/** Not Done
  * Consume an array of numbers, and return a new array containing
  * JUST the first and last number. If there are no elements, return
  * an empty array. If there is one element, the resulting list should
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
+    if (numbers.length === 0) {
+        return numbers;
+    } else if (numbers.length === 1) {
+        const numbers_2 = [...numbers, numbers[0]];
+        return numbers_2;
+    } else {
+        const numbers_3 = [numbers[0], numbers[numbers.length]];
+    }
     return numbers;
 }
 
@@ -13,14 +21,16 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    const tripled = numbers.map((num: number): number => num * 3);
+    return tripled;
 }
 
-/**
+/** Not Done
  * Consume an array of strings and convert them to integers. If
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
+    //const strToInt = numbers.map((num_: string): string => parseInt(num_));
     return [];
 }
 
@@ -35,12 +45,13 @@ export const removeDollars = (amounts: string[]): number[] => {
     return [];
 };
 
-/**
+/** Not Done
  * Consume an array of messages and return a new list of the messages. However, any
  * string that ends in "!" should be made uppercase. Also, remove any strings that end
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
+    //const shout_ = messages.map((message: string): string => message[message.length] ? )
     return [];
 };
 
@@ -49,7 +60,8 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const short = words.filter((word: string): boolean => word.length < 4);
+    return short.length;
 }
 
 /**
