@@ -8,10 +8,10 @@ export function bookEndList(numbers: number[]): number[] {
     if (numbers.length === 0) {
         return numbers;
     } else if (numbers.length === 1) {
-        const numbers_2 = [...numbers, numbers[0]];
+        const numbers_2 = [numbers[0], numbers[0]];
         return numbers_2;
     } else {
-        const numbers_3 = [numbers[0], numbers[numbers.length]];
+        const numbers_3 = [numbers[0], numbers[numbers.length - 1]];
     }
     return numbers;
 }
@@ -30,7 +30,7 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    //const strToInt = numbers.map((num_: string): string => parseInt(num_));
+    const strToInt = numbers.map((num_: string): number => Number(num_));
     return [];
 }
 
@@ -70,7 +70,19 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    if (stringsToIntegers.length === 0) {
+        return true;
+    } else {
+        const notRGB = colors.filter(
+            (color: string): boolean =>
+                color !== "red" && color !== "blue" && color !== "green"
+        );
+        if (notRGB.length === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 /**
@@ -81,7 +93,13 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length === 0) {
+        return "0=0";
+    } else {
+        const sum = addends.reduce((acc, num) => acc + num, 0);
+        const sumString = addends.join("+");
+        return `${sum}=${sumString}`;
+    }
 }
 
 /**
@@ -94,5 +112,15 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let sum = 0;
+    const negIndex = values.findIndex((value: number): boolean => value < 0);
+    if (negIndex !== -1) {
+        sum = values.slice(0, negIndex).reduce((acc, curr) => acc + curr, 0);
+        const values_2 = [...values];
+        values_2.splice(negIndex + 1, 0, sum);
+        return values_2;
+    } else {
+        sum = values.reduce((acc, curr) => acc + curr, 0);
+        return [...values, sum];
+    }
 }
