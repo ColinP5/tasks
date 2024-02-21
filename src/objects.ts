@@ -1,6 +1,6 @@
 import { Question, QuestionType } from "./interfaces/question";
 
-/**
+/** Done
  * Create a new blank question with the given `id`, `name`, and `type. The `body` and
  * `expected` should be empty strings, the `options` should be an empty list, the `points`
  * should default to 1, and `published` should default to false.
@@ -22,7 +22,7 @@ export function makeBlankQuestion(
     };
 }
 
-/**
+/** Done
  * Consumes a question and a potential `answer`, and returns whether or not
  * the `answer` is correct. You should check that the `answer` is equal to
  * the `expected`, ignoring capitalization and trimming any whitespace.
@@ -38,24 +38,32 @@ export function isCorrect(question: Question, answer: string): boolean {
     return false;
 }
 
-/**
+/** Done
  * Consumes a question and a potential `answer`, and returns whether or not
  * the `answer` is valid (but not necessarily correct). For a `short_answer_question`,
  * any answer is valid. But for a `multiple_choice_question`, the `answer` must
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
+    if (question.type === "short_answer_question") {
+        return true;
+    }
+    if (
+        question.options.some((answer_: string): boolean => answer_ === answer)
+    ) {
+        return true;
+    }
     return false;
 }
 
-/**
+/** Done
  * Consumes a question and produces a string representation combining the
  * `id` and first 10 characters of the `name`. The two strings should be
  * separated by ": ". So for example, the question with id 9 and the
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
-    return "";
+    return question.id + ": " + question.name.slice(0, 10);
 }
 
 /**
@@ -79,31 +87,43 @@ export function toMarkdown(question: Question): string {
     return "";
 }
 
-/**
+/** Done
  * Return a new version of the given question, except the name should now be
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    return question;
+    const copyQuestion = { ...question };
+    copyQuestion.name = newName;
+    return copyQuestion;
 }
 
-/**
+/** Done
  * Return a new version of the given question, except the `published` field
  * should be inverted. If the question was not published, now it should be
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    const copyQuestion = { ...question };
+    if (copyQuestion.published === true) {
+        copyQuestion.published = false;
+    } else {
+        copyQuestion.published = true;
+    }
+    return copyQuestion;
 }
 
-/**
+/** Done
  * Create a new question based on the old question, copying over its `body`, `type`,
  * `options`, `expected`, and `points` without changes. The `name` should be copied
  * over as "Copy of ORIGINAL NAME" (e.g., so "Question 1" would become "Copy of Question 1").
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    return oldQuestion;
+    const newQuestion = { ...oldQuestion };
+    newQuestion.id = id;
+    newQuestion.name = "Copy of " + oldQuestion.name;
+    newQuestion.published = false;
+    return newQuestion;
 }
 
 /**
