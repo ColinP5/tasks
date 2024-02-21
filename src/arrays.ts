@@ -1,4 +1,4 @@
-/** Not Done
+/** Done
  * Consume an array of numbers, and return a new array containing
  * JUST the first and last number. If there are no elements, return
  * an empty array. If there is one element, the resulting list should
@@ -6,17 +6,15 @@
  */
 export function bookEndList(numbers: number[]): number[] {
     if (numbers.length === 0) {
-        return numbers;
+        return [];
     } else if (numbers.length === 1) {
-        const numbers_2 = [numbers[0], numbers[0]];
-        return numbers_2;
+        return [numbers[0], numbers[0]];
     } else {
-        const numbers_3 = [numbers[0], numbers[numbers.length - 1]];
+        return [numbers[0], numbers[numbers.length - 1]];
     }
-    return numbers;
 }
 
-/**
+/** Done
  * Consume an array of numbers, and return a new array where each
  * number has been tripled (multiplied by 3).
  */
@@ -25,16 +23,19 @@ export function tripleNumbers(numbers: number[]): number[] {
     return tripled;
 }
 
-/** Not Done
+/** Done
  * Consume an array of strings and convert them to integers. If
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    const strToInt = numbers.map((num_: string): number => Number(num_));
+    return numbers.map((num_: string): number => {
+        const parsedNum = parseInt(num_);
+        return isNaN(parsedNum) ? 0 : parsedNum;
+    });
     return [];
 }
 
-/**
+/** Done
  * Consume an array of strings and return them as numbers. Note that
  * the strings MAY have "$" symbols at the beginning, in which case
  * those should be removed. If the result cannot be parsed as an integer,
@@ -42,20 +43,31 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    return amounts.map((amount: string): number => {
+        if (amount[0] === "$") {
+            amount = amount.slice(1);
+        }
+        const parsedNum = parseInt(amount);
+        return isNaN(parsedNum) ? 0 : parsedNum;
+    });
 };
 
-/** Not Done
+/** Done
  * Consume an array of messages and return a new list of the messages. However, any
  * string that ends in "!" should be made uppercase. Also, remove any strings that end
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    //const shout_ = messages.map((message: string): string => message[message.length] ? )
-    return [];
+    const messages_ = messages.filter(
+        (message: string): boolean => message.endsWith("?") === false
+    );
+    const shout_ = messages_.map((message: string): string =>
+        message.endsWith("!") ? message.toUpperCase() : message
+    );
+    return shout_;
 };
 
-/**
+/** Done
  * Consumes an array of words and returns the number of words that are LESS THAN
  * 4 letters long.
  */
@@ -70,22 +82,16 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    if (stringsToIntegers.length === 0) {
+    //console.log("Test-TEST-2 " + colors.length);
+    if (colors.length === 0) {
         return true;
-    } else {
-        const notRGB = colors.filter(
-            (color: string): boolean =>
-                color !== "red" && color !== "blue" && color !== "green"
-        );
-        if (notRGB.length === 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
+    return colors.every((color: string): boolean =>
+        ["red", "green", "blue"].includes(color)
+    );
 }
 
-/**
+/** Done
  * Consumes an array of numbers, and produces a string representation of the
  * numbers being added together along with their actual sum.
  *
@@ -102,7 +108,7 @@ export function makeMath(addends: number[]): string {
     }
 }
 
-/**
+/** Done
  * Consumes an array of numbers and produces a new array of the same numbers,
  * with one difference. After the FIRST negative number, insert the sum of all
  * previous numbers in the list. If there are no negative numbers, then append
