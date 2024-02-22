@@ -13,7 +13,7 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
     return publishedCopy;
 }
 
-/**
+/** Done
  * Consumes an array of questions and returns a new array of only the questions that are
  * considered "non-empty". An empty question has an empty string for its `body` and
  * `expected`, and an empty array for its `options`.
@@ -159,7 +159,7 @@ export function sameType(questions: Question[]): boolean {
     }
     const firstType = questions[0].type;
     const same = questions.every(
-        (question: Question): Boolean => question.type === firstType
+        (question: Question): boolean => question.type === firstType
     );
     return same;
 }
