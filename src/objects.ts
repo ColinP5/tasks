@@ -84,7 +84,13 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+    var markdownString = `# ${question.name}\n${question.body}`;
+    if (question.type === "multiple_choice_question") {
+        question.options.forEach((option: string) => {
+            markdownString += `\n- ${option}`;
+        });
+    }
+    return markdownString;
 }
 
 /** Done
@@ -141,7 +147,7 @@ export function addOption(question: Question, newOption: string): Question {
     return newQuestion;
 }
 
-/**
+/** Done
  * Consumes an id, name, and two questions, and produces a new question.
  * The new question will use the `body`, `type`, `options`, and `expected` of the
  * `contentQuestion`. The second question will provide the `points`.
