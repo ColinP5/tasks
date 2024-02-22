@@ -1,5 +1,6 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import { makeBlankQuestion } from "./objects";
 
 /** Done
  * Consumes an array of questions and returns a new array with only the questions
@@ -66,7 +67,7 @@ export function getNames(questions: Question[]): string[] {
     return nameArray;
 }
 
-/***
+/*** Done
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
@@ -82,6 +83,10 @@ export function sumPoints(questions: Question[]): number {
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
  */
 export function sumPublishedPoints(questions: Question[]): number {
+    const sumTot = questions.reduce(
+        (currentSum: number, question: Question): boolean => question.published,
+        0
+    );
     return 0;
 }
 
@@ -115,20 +120,30 @@ export function makeAnswers(questions: Question[]): Answer[] {
     return [];
 }
 
-/***
+/*** Done
  * Consumes an array of Questions and produces a new array of questions, where
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    const allPub = questions.map(
+        (question: Question): Question => ({ ...question, published: true })
+    );
+    return allPub;
 }
 
-/***
+/*** Done
  * Consumes an array of Questions and produces whether or not all the questions
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    if (questions.length === 0) {
+        return true;
+    }
+    const firstType = questions[0].type;
+    const same = questions.every(
+        (question: Question): Boolean => question.type === firstType
+    );
+    return same;
 }
 
 /***
@@ -142,7 +157,9 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    let newArr = questions.map((question: Question) => ({ ...question }));
+    newArr.push(makeBlankQuestion(id, name, type));
+    return newArr;
 }
 
 /***
