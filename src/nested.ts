@@ -1,12 +1,15 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 
-/**
+/** Done
  * Consumes an array of questions and returns a new array with only the questions
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    return [];
+    const publishedCopy = questions.filter((question: Question) => {
+        return question.published === true;
+    });
+    return publishedCopy;
 }
 
 /**
@@ -15,7 +18,13 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [];
+    const returnQuestions = questions.filter(
+        (question: Question) =>
+            question.body.length !== 0 &&
+            question.expected.length !== 0 &&
+            question.options.length !== 0
+    );
+    return returnQuestions;
 }
 
 /***
@@ -26,6 +35,12 @@ export function findQuestion(
     questions: Question[],
     id: number
 ): Question | null {
+    const foundQuestion = questions.find(
+        (question: Question): boolean => question.id === id
+    );
+    if (foundQuestion) {
+        return foundQuestion;
+    }
     return null;
 }
 
