@@ -1,6 +1,6 @@
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion } from "./objects";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /** Done
  * Consumes an array of questions and returns a new array with only the questions
@@ -108,16 +108,30 @@ id,name,options,points,published
  * Check the unit tests for more examples!
  */
 export function toCSV(questions: Question[]): string {
-    return "";
+    const questionsCSV = questions
+        .map(
+            (question: Question): string =>
+                `${question.id},${question.name},${question.options.length},${question.points},${question.published}`
+        )
+        .join("\n");
+    return "id,name,options,points,published\n" + questionsCSV;
 }
 
-/**
+/** Done
  * Consumes an array of Questions and produces a corresponding array of
  * Answers. Each Question gets its own Answer, copying over the `id` as the `questionId`,
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    return [];
+    const newArr = questions.map(
+        (question: Question): Answer => ({
+            questionId: question.id,
+            text: "",
+            submitted: false,
+            correct: false
+        })
+    );
+    return newArr;
 }
 
 /*** Done
@@ -157,12 +171,15 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    let newArr = questions.map((question: Question) => ({ ...question }));
+    let newArr = questions.map((question: Question) => ({
+        ...question,
+        options: [...question.options]
+    }));
     newArr.push(makeBlankQuestion(id, name, type));
     return newArr;
 }
 
-/***
+/*** Done
  * Consumes an array of Questions and produces a new array of Questions, where all
  * the Questions are the same EXCEPT for the one with the given `targetId`. That
  * Question should be the same EXCEPT that its name should now be `newName`.
@@ -211,7 +228,7 @@ export function changeQuestionTypeById(
     return newArr;
 }
 
-/**
+/** Done
  * Consumes an array of Questions and produces a new array of Questions, where all
  * the Questions are the same EXCEPT for the one with the given `targetId`. That
  * Question should be the same EXCEPT that its `option` array should have a new element.
@@ -227,10 +244,24 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    let newArr = questions.map((question: Question) => ({
+        ...question,
+        options: [...question.options]
+    }));
+    let found = newArr.find(
+        (question: Question): boolean => question.id === targetId
+    );
+    if (found) {
+        if (targetOptionIndex === -1) {
+            found.options = [...found.options, newOption];
+        } else {
+            found.options[targetOptionIndex] = newOption;
+        }
+    }
+    return newArr;
 }
 
-/***
+/*** Done
  * Consumes an array of questions, and produces a new array based on the original array.
  * The only difference is that the question with id `targetId` should now be duplicated, with
  * the duplicate inserted directly after the original question. Use the `duplicateQuestion`
@@ -241,5 +272,15 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    let newArr = questions.map((question: Question) => ({
+        ...question,
+        options: [...question.options]
+    }));
+    let found = newArr.find(
+        (question: Question): boolean => question.id === targetId
+    );
+    let startIndex = newArr.indexOf(found);
+    const duplicate_ = duplicateQuestion(newId, found);
+    newArr.splice(startIndex + 1, 0, duplicate_);
+    return newArr;
 }
