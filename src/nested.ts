@@ -146,7 +146,7 @@ export function sameType(questions: Question[]): boolean {
     return same;
 }
 
-/***
+/*** Done
  * Consumes an array of Questions and produces a new array of the same Questions,
  * except that a blank question has been added onto the end. Reuse the `makeBlankQuestion`
  * you defined in the `objects.ts` file.
@@ -172,10 +172,18 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    return [];
+    let newArr = questions.map((question: Question) => ({
+        ...question,
+        options: [...question.options]
+    }));
+    let found = newArr.find(
+        (question: Question): boolean => question.id === targetId
+    );
+    found.name = newName;
+    return newArr;
 }
 
-/***
+/*** Done
  * Consumes an array of Questions and produces a new array of Questions, where all
  * the Questions are the same EXCEPT for the one with the given `targetId`. That
  * Question should be the same EXCEPT that its `type` should now be the `newQuestionType`
@@ -187,7 +195,20 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    return [];
+    let newArr = questions.map((question: Question) => ({
+        ...question,
+        options: [...question.options]
+    }));
+    let found = newArr.find(
+        (question: Question): boolean => question.id === targetId
+    );
+    if (found) {
+        if (found.type === "multiple_choice_question") {
+            found.options = [];
+        }
+        found.type = newQuestionType;
+    }
+    return newArr;
 }
 
 /**
