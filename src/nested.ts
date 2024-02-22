@@ -27,7 +27,7 @@ export function getNonEmptyQuestions(questions: Question[]): Question[] {
     return returnQuestions;
 }
 
-/***
+/*** Done
  * Consumes an array of questions and returns the question with the given `id`. If the
  * question is not found, return `null` instead.
  */
@@ -44,27 +44,38 @@ export function findQuestion(
     return null;
 }
 
-/**
+/** Done
  * Consumes an array of questions and returns a new array that does not contain the question
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    return [];
+    const returnQuestions = questions.filter(
+        (question: Question): boolean => question.id !== id
+    );
+    return returnQuestions;
 }
 
-/***
+/*** Done
  * Consumes an array of questions and returns a new array containing just the names of the
  * questions, as an array.
  */
 export function getNames(questions: Question[]): string[] {
-    return [];
+    const nameArray = questions.map(
+        (question: Question): string => question.name
+    );
+    return nameArray;
 }
 
 /***
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
-    return 0;
+    const totalPoints = questions.reduce(
+        (currentSum: number, question: Question) =>
+            currentSum + question.points,
+        0
+    );
+    return totalPoints;
 }
 
 /***
