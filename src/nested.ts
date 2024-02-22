@@ -175,7 +175,7 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    let newArr = questions.map((question: Question) => ({
+    const newArr = questions.map((question: Question) => ({
         ...question,
         options: [...question.options]
     }));
@@ -193,11 +193,11 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    let newArr = questions.map((question: Question) => ({
+    const newArr = questions.map((question: Question) => ({
         ...question,
         options: [...question.options]
     }));
-    let found = newArr.find(
+    const found = newArr.find(
         (question: Question): boolean => question.id === targetId
     );
     found.name = newName;
@@ -216,11 +216,11 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    let newArr = questions.map((question: Question) => ({
+    const newArr = questions.map((question: Question) => ({
         ...question,
         options: [...question.options]
     }));
-    let found = newArr.find(
+    const found = newArr.find(
         (question: Question): boolean => question.id === targetId
     );
     if (found) {
@@ -248,11 +248,11 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    let newArr = questions.map((question: Question) => ({
+    const newArr = questions.map((question: Question) => ({
         ...question,
         options: [...question.options]
     }));
-    let found = newArr.find(
+    const found = newArr.find(
         (question: Question): boolean => question.id === targetId
     );
     if (found) {
@@ -276,14 +276,14 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    let newArr = questions.map((question: Question) => ({
+    const newArr = questions.map((question: Question) => ({
         ...question,
         options: [...question.options]
     }));
-    let found = newArr.find(
+    const found = newArr.find(
         (question: Question): boolean => question.id === targetId
     );
-    let startIndex = newArr.indexOf(found);
+    const startIndex = newArr.indexOf(found);
     const duplicate_ = duplicateQuestion(newId, found);
     newArr.splice(startIndex + 1, 0, duplicate_);
     return newArr;
