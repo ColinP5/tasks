@@ -19,13 +19,13 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    const returnQuestions = questions.filter(
-        (question: Question) =>
-            question.body.length !== 0 &&
-            question.expected.length !== 0 &&
+    const newArr = questions.filter(
+        (question: Question): boolean =>
+            question.body !== "" ||
+            question.expected !== "" ||
             question.options.length !== 0
     );
-    return returnQuestions;
+    return newArr;
 }
 
 /*** Done
@@ -79,18 +79,22 @@ export function sumPoints(questions: Question[]): number {
     return totalPoints;
 }
 
-/***
+/*** Done
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
  */
 export function sumPublishedPoints(questions: Question[]): number {
-    const sumTot = questions.reduce(
-        (currentSum: number, question: Question): boolean => question.published,
+    const newArr = questions.filter(
+        (question: Question): boolean => question.published
+    );
+    const sum = newArr.reduce(
+        (currentSum: number, question: Question) =>
+            currentSum + question.points,
         0
     );
-    return 0;
+    return sum;
 }
 
-/***
+/*** Done
  * Consumes an array of questions, and produces a Comma-Separated Value (CSV) string representation.
  * A CSV is a type of file frequently used to share tabular data; we will use a single string
  * to represent the entire file. The first line of the file is the headers "id", "name", "options",
