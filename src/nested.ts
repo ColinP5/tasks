@@ -200,7 +200,9 @@ export function renameQuestionById(
     const found = newArr.find(
         (question: Question): boolean => question.id === targetId
     );
-    found.name = newName;
+    if (found) {
+        found.name = newName;
+    }
     return newArr;
 }
 
@@ -283,8 +285,10 @@ export function duplicateQuestionInArray(
     const found = newArr.find(
         (question: Question): boolean => question.id === targetId
     );
-    const startIndex = newArr.indexOf(found);
-    const duplicate_ = duplicateQuestion(newId, found);
-    newArr.splice(startIndex + 1, 0, duplicate_);
+    if (found) {
+        const startIndex = newArr.indexOf(found);
+        const duplicate_ = duplicateQuestion(newId, found);
+        newArr.splice(startIndex + 1, 0, duplicate_);
+    }
     return newArr;
 }
