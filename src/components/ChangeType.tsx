@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { QuestionType } from "../interfaces/question";
-
+//Done
 export function ChangeType(): JSX.Element {
     const [type_, setType] = useState<QuestionType>("short_answer_question");
 
     function changeType_(): void {
-        setType(
-            type_ == "multiple_choice_question"
-                ? "short_answer_question"
-                : type_ == "short_answer_question"
-                ? "multiple_choice_question"
-                : "short_answer_question"
-        );
+        let newType: QuestionType;
+        if (type_ === "multiple_choice_question") {
+            newType = "short_answer_question";
+        } else if (type_ === "short_answer_question") {
+            newType = "multiple_choice_question";
+        } else {
+            newType = "short_answer_question";
+        }
+        setType(newType);
     }
 
     return (
