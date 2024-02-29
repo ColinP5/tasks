@@ -1,5 +1,5 @@
 import React from "react";
-import image from "./Images/vaporwave_moped_banner.jpg";
+//import image from "./Images/vaporwave_moped_banner.jpg";
 import "./App.css";
 import { ChangeType } from "./components/ChangeType";
 import { RevealAnswer } from "./components/RevealAnswer";
