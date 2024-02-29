@@ -1,16 +1,15 @@
 {
   "files": {
     "main.css": "/tasks/static/css/main.26d1bdfe.css",
-    "main.js": "/tasks/static/js/main.e03e714f.js",
+    "main.js": "/tasks/static/js/main.e4dc5ba1.js",
     "static/js/787.4ef7427d.chunk.js": "/tasks/static/js/787.4ef7427d.chunk.js",
-    "static/media/vaporwave_moped_banner.jpg": "/tasks/static/media/vaporwave_moped_banner.49505d3da4051e712fce.jpg",
     "index.html": "/tasks/index.html",
     "main.26d1bdfe.css.map": "/tasks/static/css/main.26d1bdfe.css.map",
-    "main.e03e714f.js.map": "/tasks/static/js/main.e03e714f.js.map",
+    "main.e4dc5ba1.js.map": "/tasks/static/js/main.e4dc5ba1.js.map",
     "787.4ef7427d.chunk.js.map": "/tasks/static/js/787.4ef7427d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.26d1bdfe.css",
-    "static/js/main.e03e714f.js"
+    "static/js/main.e4dc5ba1.js"
   ]
 }
