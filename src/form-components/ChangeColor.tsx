@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
+import "./ChangeColor.css";
 
 const COLORS = [
     "red",
@@ -15,7 +16,9 @@ const COLORS = [
 export function ChangeColor(): JSX.Element {
     const [color, setColor] = useState<string>("");
 
-    function updateColor() {}
+    function updateColor(event: React.ChangeEvent<HTMLInputElement>) {
+        setColor(event.target.value);
+    }
 
     return (
         <>
@@ -26,6 +29,7 @@ export function ChangeColor(): JSX.Element {
                 <Form.Group controlId="Color Options">
                     {COLORS.map((colorOption, index) => (
                         <Form.Check
+                            inline
                             key={index}
                             type="radio"
                             name="colorOptions"
@@ -38,6 +42,11 @@ export function ChangeColor(): JSX.Element {
                         />
                     ))}
                 </Form.Group>
+            </div>
+            <div>
+                You have chosen
+                <span> </span>
+                <span className={`color-${color}`}> {color}</span>.
             </div>
         </>
     );
