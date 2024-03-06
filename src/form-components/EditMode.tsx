@@ -26,7 +26,11 @@ export function EditMode(): JSX.Element {
             {editMode ? (
                 //Displayed When editMode is true
                 <div>
-                    <Form.Group controlId="EditMode - name" as={Row}>
+                    <Form.Group
+                        controlId="EditMode - name"
+                        as={Row}
+                        className="justify-content-start"
+                    >
                         <Form.Label column sm={2}>
                             Name:
                         </Form.Label>
@@ -39,12 +43,16 @@ export function EditMode(): JSX.Element {
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group controlId="EditMode - student" as={Row}>
+                    <Form.Group
+                        controlId="EditMode - student"
+                        as={Row}
+                        className="justify-content-start"
+                    >
                         <Form.Label column sm={2}>
                             Is a Student:
                         </Form.Label>
                         <Col>
-                            <Form.Control
+                            <Form.Check
                                 type="checkbox"
                                 id="is-student-check"
                                 checked={isStudent}
