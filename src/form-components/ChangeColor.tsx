@@ -33,7 +33,7 @@ export function ChangeColor(): JSX.Element {
                             key={index}
                             type="radio"
                             name="colorOptions"
-                            data-testid="colored-box"
+                            //data-testid="colored-box"
                             label={colorOption}
                             value={colorOption}
                             checked={color === colorOption}
@@ -46,7 +46,14 @@ export function ChangeColor(): JSX.Element {
             <div>
                 You have chosen
                 <span> </span>
-                <span className={`color-${color}`}> {color}</span>.
+                <span
+                    data-testid="colored-box"
+                    style={{ backgroundColor: color }}
+                >
+                    {" "}
+                    {color}
+                </span>
+                .
             </div>
         </>
     );

@@ -7,7 +7,15 @@ export function EditMode(): JSX.Element {
     const [isStudent, setIsStudent] = useState<boolean>(true);
 
     function updateEditMode(event: React.ChangeEvent<HTMLInputElement>) {
-        setEditMode(event.target.checked);
+        setEditMode(!editMode);
+    }
+
+    function updateName(event: React.ChangeEvent<HTMLInputElement>) {
+        setName(event.target.value);
+    }
+
+    function updateStudent(event: React.ChangeEvent<HTMLInputElement>) {
+        setIsStudent(!isStudent);
     }
 
     return (
@@ -33,14 +41,7 @@ export function EditMode(): JSX.Element {
                         <Form.Label column sm={2}>
                             Name:
                         </Form.Label>
-                        <Col>
-                            <Form.Control
-                                value={name}
-                                onChange={(
-                                    event: React.ChangeEvent<HTMLInputElement>
-                                ) => setName(event.target.value)}
-                            />
-                        </Col>
+                        <Form.Control value={name} onChange={updateName} />
                     </Form.Group>
                     <Form.Group
                         controlId="EditMode - student"
@@ -50,16 +51,14 @@ export function EditMode(): JSX.Element {
                         <Form.Label column sm={2}>
                             Is a Student:
                         </Form.Label>
-                        <Col>
-                            <Form.Check
-                                type="checkbox"
-                                id="is-student-check"
-                                checked={isStudent}
-                                onChange={(
-                                    event: React.ChangeEvent<HTMLInputElement>
-                                ) => setIsStudent(event.target.checked)}
-                            />
-                        </Col>
+                        <Form.Check
+                            label="student"
+                            name="student"
+                            type="checkbox"
+                            id="is-student-check"
+                            checked={isStudent}
+                            onChange={updateStudent}
+                        />
                     </Form.Group>
                 </div>
             ) : (
